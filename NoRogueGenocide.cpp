@@ -12,19 +12,27 @@ public:
   virtual void Init ( const char* config);
 
   virtual void Event ( bz_EventData *  eventData );
+  
+  bool silentMode;
+  bool seamlessMode;
 };
 
 BZ_PLUGIN(NoRogueGenocide)
 
-void NoRogueGenocide::Init ( const char* /*commandLine*/ )
+void NoRogueGenocide::Init ( const char* commandLine )
 {
   bz_debugMessage(4,"NoRogueGenocide plugin loaded");
+  
+  std::string param = bz_tolower(commandLine);
+
+  silentMode = (param == "silent" || param == "quiet");
+  seamlessMode = (param == "seamless" || param == "hidden");
   
   Register(bz_eFlagGrabbedEvent);
   Register(bz_eShotFiredEvent);
 }
 
-void NoRogueGenocide::Event ( bz_EventData * eventData) 
+void NoRogueGenocide::Event ( bz_EventData * eventData ) 
 {
   const char* geno = "G";
 
@@ -32,14 +40,21 @@ void NoRogueGenocide::Event ( bz_EventData * eventData)
     case bz_eFlagGrabbedEvent: {
       bz_FlagGrabbedEventData_V1	*grabData = (bz_FlagGrabbedEventData_V1*)eventData;
 
-     
+      const char* flagType = bz_getFlagName(grabData->flagID).c_str();
+
+      // Do nothing if we are on seamless mode
+      if (seamlessMode) return;
+      std::cout<<seamlessMode<<std::endl;
+
       // Do nothing if the flag isn't Genocide
-      if (bz_getFlagName(grabData->flagID).c_str() != geno) return;
-     
+      if (strcmp(flagType,geno) != 0) return;
+
       // Do nothing if the player is not a rogue
       if (bz_getPlayerTeam(grabData->playerID) != eRogueTeam) return;
 
-      //bz_removePlayerFlag(grabData->playerID);
+      if (!silentMode) bz_sendTextMessage(BZ_SERVER, grabData->playerID, "You can't pick up Genocide if you are a rogue!");
+
+      bz_removePlayerFlag(grabData->playerID);
 
     } break;
     
