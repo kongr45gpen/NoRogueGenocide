@@ -4,10 +4,19 @@
 
 This is the NoRogueGenocide plugin.
 
-Replace every occurrence of the term NoRogueGenocide in every file in here
-with the name of your project.  Also open .sln and .vcproj files in a
-text editor and do a search and replace.  Then write a short readme with
-usage instructions or other details in this file. If you did not use the
-newplug.sh script to create this directory, add the appropriate entries
-to configure.ac and plugins/Makefile.am. The plugin will have to be
-manually added to the mac Xcode project.
+It prevents rogues from getting or using the Genocide (G) flag. 
+
+It operates under 3 different modes:
+
+- Default mode: Prevents rogues from getting the G flag, sending them an
+                informative message every time they try to pick one up.
+
+- Silent mode: Prevents rogues from getting the G flag, without sending
+               any messages.
+
+- Seamless mode: Although rogues can still take the geno flag, their shots
+                 will not act as geno shots and will only kill one person,
+                 as opposed to the whole team.
+
+To activate the silent mode add 'silent' or 'quiet' as a command line argument,
+while 'seamless' or 'hidden' will can be used to enable the seamless mode.
