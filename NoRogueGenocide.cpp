@@ -69,7 +69,7 @@ void NoRogueGenocide::Event ( bz_EventData * eventData )
       if (bz_getPlayerTeam(shotData->playerID) != eRogueTeam) return;
 
       // Convert the shot to a regular one
-      shotData->type = "MG";
+      shotData->type = "G";
       shotData->changed = true;
 
     } break;
