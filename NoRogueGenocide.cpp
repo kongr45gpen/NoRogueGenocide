@@ -79,6 +79,7 @@ void NoRogueGenocide::Event ( bz_EventData * eventData )
   }
 }
 
+
 // Local Variables: ***
 // mode:C++ ***
 // tab-width: 8 ***
