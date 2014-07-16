@@ -1,8 +1,6 @@
-========================================================================
-    DYNAMIC LINK LIBRARY : NoRogueGenocide Project Overview
-========================================================================
+## NoRogueGenocide Project Overview
 
-This is the NoRogueGenocide plugin.
+This is the NoRogueGenocide plugin for BZFlag.
 
 It prevents rogues from getting or using the Genocide (G) flag. 
 
